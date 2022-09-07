@@ -9,6 +9,7 @@ Please refer to section 1.3 of the "Lab Assigment Manual" for the Rules, Regulat
 
 ### Documentation for the GNU Assembler:
   http://microelectronics.esa.int/erc32/doc/as.pdf
+  
   https://sourceware.org/binutils/docs/as/
 
 ### GNU Assembler Examples:

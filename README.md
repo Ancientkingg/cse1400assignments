@@ -8,6 +8,8 @@ This code was written for the mandatory and bonus assignments of CSE1400 at TU D
 - Any instructions will be indented using a SINGLE tab. 
 - All instructions require a postfix expression to be specified explicitly to avoid any ambiguity or confusion.
 - Please refer to section 1.3 of the "Lab Assigment Manual" for the Rules, Regulations and Etiquette.
+- Subroutines must contain both a prologue and epilogue.
+- To exit the main function, thus the program, call `exit`.
 
 ## Useful links:
 

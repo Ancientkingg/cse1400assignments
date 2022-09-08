@@ -7,6 +7,9 @@ Please refer to section 1.3 of the "Lab Assigment Manual" for the Rules, Regulat
 
 ## Useful links:
 
+### x86-64 simplified
+  https://treeniks.github.io/x86-64-simplified/
+
 ### Documentation for the GNU Assembler:
   http://microelectronics.esa.int/erc32/doc/as.pdf
   

@@ -1,10 +1,9 @@
 # netID rbvandenbrink, samuelbruin
 # Rick weet ik veel van den Brink, Samuel Bruin
-# 5807425, 5782538
-
+# <netID>, 5782538
 
 .text
-helloworld: .asciz "\n Hello World!\n"
+helloworld: .asciz "Hello World!\n"
 
 
 .global main

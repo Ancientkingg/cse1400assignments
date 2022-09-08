@@ -13,6 +13,9 @@ This code was written for the mandatory and bonus assignments of CSE1400 at TU D
 
 ## Useful links:
 
+### Optimizing assembly
+  https://www.agner.org/optimize/ 
+
 ### x86-64 simplified
   https://treeniks.github.io/x86-64-simplified/
 

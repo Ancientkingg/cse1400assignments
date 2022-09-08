@@ -2,7 +2,9 @@
 This repository hosts all of the source code to the assignments (Y1Q1) for Computer Organisation (CSE1400).
 
 This code was written for the mandatory and bonus assignments of CSE1400 at TU Delft. This repository organizes each project into its own folder to avoid using many repositories.
-The code hosted in this repository will be indented using TABS. Any instructions will be indented using a SINGLE tab. 
+
+### Codestyle
+The code hosted in this repository will be indented using TABS. Any instructions will be indented using a SINGLE tab. Secondly all instructions require a postfix expression to be specified explicitly to avoid any ambiguity or confusion.
 Please refer to section 1.3 of the "Lab Assigment Manual" for the Rules, Regulations and Etiquette.
 
 ## Useful links:

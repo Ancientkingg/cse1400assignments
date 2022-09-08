@@ -7,7 +7,7 @@
 helloworld: .asciz "\n Hello World!\n"
 
 
-.global main
+.global main hoi
 
 # main function
 main:

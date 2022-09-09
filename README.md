@@ -18,6 +18,7 @@ This code was written for the mandatory and bonus assignments of CSE1400 at TU D
   
 ### Brainfuck optimization strategies
   http://calmerthanyouare.org/2015/01/07/optimizing-brainfuck.html
+
   https://www.nayuki.io/page/optimizing-brainfuck-compiler
 
 ### x86-64 simplified

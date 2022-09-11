@@ -20,6 +20,9 @@ This code was written for the mandatory and bonus assignments of CSE1400 at TU D
   http://calmerthanyouare.org/2015/01/07/optimizing-brainfuck.html
 
   https://www.nayuki.io/page/optimizing-brainfuck-compiler
+  
+  #### JIT
+  https://toastedcornflakes.github.io/articles/jit-brainfuck.html
 
 ### x86-64 simplified
   https://treeniks.github.io/x86-64-simplified/

@@ -13,6 +13,20 @@ This code was written for the mandatory and bonus assignments of CSE1400 at TU D
 
 ## Useful links:
 
+### Optimizing assembly
+  https://www.agner.org/optimize/ 
+  
+### Brainfuck optimization strategies
+  http://calmerthanyouare.org/2015/01/07/optimizing-brainfuck.html
+
+  https://www.nayuki.io/page/optimizing-brainfuck-compiler
+
+  Jumptable: http://www.cs.umd.edu/~waa/311-F09/jumptable.pdf
+  
+  JIT: https://toastedcornflakes.github.io/articles/jit-brainfuck.html
+
+  https://github.com/rdebath/Brainfuck
+
 ### x86-64 simplified
   https://treeniks.github.io/x86-64-simplified/
 

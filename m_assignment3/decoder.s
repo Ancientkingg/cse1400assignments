@@ -1,6 +1,6 @@
 .text
 
-.include "final.s"
+.include "hello_world.s"
 
 .global main
 

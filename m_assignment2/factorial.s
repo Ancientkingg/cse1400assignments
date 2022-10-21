@@ -68,7 +68,7 @@ factorial:
 
     factorial_end_early:
         movq $1, %rax # if the input is not bigger than 1 set output to 1 and return
-
+    
     factorial_end:
         # epilogue
         movq %rbp, %rsp

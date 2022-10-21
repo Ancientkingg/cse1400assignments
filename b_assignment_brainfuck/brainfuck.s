@@ -28,45 +28,31 @@ cells: .skip 50000 # allocate 50k bytes on the stack
             .quad end_loop
         .endr
 .text # read only memory
-    dbg: .asciz "%d: %c\n"
-    linebreak: .asciz "\n"
 
-.global main
+.global brainfuck
 
-main:
-    ## subroutine prologue ##
-    push %rbp # store old base pointer on stack
-    mov %rsp, %rbp # store current stack pointer as base pointer for subroutine
+# Your brainfuck subroutine will receive one argument:
+# a zero terminated string containing the code to execute.
+brainfuck:
+	pushq %rbp
+	movq %rsp, %rbp
 
-    mov 8(%rsi), %r12 # get pointer to first argument
-    
+
+	# calling conventions
+	pushq %r12
+	pushq %r13
+	pushq %r14
+	pushq %r15
+	pushq %rbx
+	# needs to be 16 byte aligned so we push filler value
+	pushq $0
+
+	mov %rdi, %r12 # get pointer to first argument
     mov $0, %r13 # current index into string
     mov $0, %r14 # current pointer to cell
     
     loop:
-        #print current char to stdout
-        #mov (%r12, %r13, 1), %rdi
-        #mov $0, %rsi
-        #mov $0, %rax
-        #call putchar
-
-        mov $dbg, %rdi
-
         mov %r13, %rsi
-
-        mov $0, %rdx
-        mov (%r12, %r13, 1), %rdx
-
-        mov $0, %rax
-
-        #call printf
-
-
-        cmp $10166, %r13
-        jnz skip_breakpoint
-        nop
-
-        skip_breakpoint:
 
         mov $0, %rax # clear most significant bits of rax
         movb (%r12, %r13, 1), %al # rax = current character
@@ -74,11 +60,11 @@ main:
 
         end_loop:
             add $1, %r13
-            cmp $30000, %r13
+            cmp $60000, %r13 # stop the program after a while
             jne loop
 
     end:
-    mov $'\n', %rdi
+    mov $'\n', %rdi # print a linebreak
     mov $0, %rsi
     mov $0, %rax
     call putchar
@@ -87,50 +73,48 @@ main:
     call exit
 
     handle_zero:
-        jmp end
+        jmp end # if theres a null character terminate the program
     handle_greater:
         add $1, %r14 # go to the next cell by incrementing the cell pointer (add|sub > inc in terms of perf)
         jmp end_loop
     handle_less:
         sub $1, %r14 # go to the previous cell by decrementing the cell pointer
         jmp end_loop
-    handle_plus:
+    handle_plus: # increment current cell
         mov $cells, %rsi
-        add $1, (%rsi, %r14, 1)
-
+        add $1, (%rsi, %r14, 1) # indirect addressing; see rsi as an array and r14 as an index
         jmp end_loop
-    handle_min:
+    handle_min: # decrement current cell
         mov $cells, %rsi
         sub $1, (%rsi, %r14, 1)
 
         jmp end_loop
-    handle_dot:
+    handle_dot: # print
         mov $cells, %rsi
         mov (%rsi, %r14, 1), %rdi
         mov $0, %rsi
         mov $0, %rax
-        mov $0, %rdx
-        push %rsp # push rsp to align stack to 16 bytes
         call putchar
-        pop %rsp # pop rsp to clean up stack again
 
         jmp end_loop
-    handle_comma: #//! NEED TO TEST
+    handle_comma: # ask for input
         call getchar
         mov $cells, %rdi
         add %r14, %rdi
         mov %al, (%rdi)
         jmp end_loop
-    handle_opening_bracket:
+    handle_opening_bracket: # start of loop
         mov $cells, %rsi # mem
         mov (%rsi, %r14, 1), %dil # mem[cell_idx]; r14: cell_idx
         test %dil, %dil
         jz find_closing_bracket # if mem[cell_idx] != 0 then jump
 
-        #els store the start of the loop onto the stack
-        push %r13 # push instruction_pointer
+        # els store the start of the loop onto the stack
+		pushq $0
+        pushq %r13 # push instruction_pointer
         jmp end_loop
 
+		# loop through the program to find the closing bracket
         find_closing_bracket:
             mov %r13, %r15 # size_t jmp = instruction_pointer
             mov $1, %rcx # uint8_t brackets = 1
@@ -156,7 +140,7 @@ main:
             
             mov %r15, %r13 # instruction_pointer = jump
         jmp end_loop # break
-    handle_closing_bracket:
+    handle_closing_bracket: # end of loop
         mov $cells, %rsi # mem
         mov (%rsi, %r14, 1), %dil # mem[cell_idx]; r14: cell_idx
         test %dil, %dil
@@ -165,10 +149,18 @@ main:
         jmp end_loop
 
         closing_bracket_else:
-            add $8, %rsp # pop to nowhere
+            add $16, %rsp # pop to nowhere
 
         jmp end_loop
 
-    ## subroutine epilogue ##
-    mov %rbp, %rsp
-    pop %rbp
+	# get rid of filler value for adhering to calling conventions
+	addq $8, %rsp
+	popq %rbx
+	popq %r15
+	popq %r14
+	popq %r13
+	popq %r12
+
+	movq %rbp, %rsp
+	popq %rbp
+	ret
